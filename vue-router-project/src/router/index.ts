@@ -12,6 +12,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      // alias: ['/home', '/']
+    },
+    {
+      //option 2 for alias: redirect
+      path: '/home',
+      redirect: '/',
     },
     {
       path: '/favorites',
@@ -26,7 +32,9 @@ const router = createRouter({
     {
       path: '/recipe/:id',
       name: 'recipe',
-      component: RecipeView
+      component: RecipeView,
+      // alias for recipes with alternative name
+      alias: '/meal/:id',
     },
     {
       //handle 404
