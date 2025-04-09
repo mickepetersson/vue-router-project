@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Recipe plus the id, picked from route param /recipe/# -->
     Recipe {{ $route.params.id }}
   </div>
 </template>
