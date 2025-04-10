@@ -1,19 +1,10 @@
 <template>
     <main>
-        <h1>Home</h1>
-        <nav>
+        <h1>Recipe Book</h1>
+        <nav v-if="recipeStore.recipes.length > 0">
             <ul>
-                <li>
-                    <RouterLink :to="{ name: 'recipe', params: { id: 1 } }">Recipe 1</RouterLink>
-                </li>
-                <li>
-                    <RouterLink :to="{ name: 'recipe', params: { id: 2 } }">Recipe 2</RouterLink>
-                </li>
-                <li>
-                    <RouterLink :to="{ name: 'recipe', params: { id: 3 } }">Recipe 3</RouterLink>
-                </li>
-                <li>
-                    <RouterLink :to="{ name: 'recipe', params: { id: 4 } }">Recipe 4</RouterLink>
+                <li v-for="recipe in recipeStore.recipes" :key="recipe.id">
+                    <RouterLink :to="{ name: 'recipe', params: { id: 1 } }">{{ recipe.name }}</RouterLink>
                 </li>
 
             </ul>
@@ -23,6 +14,9 @@
 </template>
 
 <script setup lang="ts">
+import { useRecipeStore } from '@/stores/recipe';
 import { RouterLink } from 'vue-router';
+
+const recipeStore = useRecipeStore();
 
 </script>
