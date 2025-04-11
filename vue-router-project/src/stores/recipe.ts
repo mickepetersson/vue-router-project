@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { computed } from 'vue';
 
 interface IRecipe {
   id: string;
@@ -30,6 +31,14 @@ export const useRecipeStore = defineStore('recipe', () => {
     return recipes.value.find(recipe => recipe.id === id);
   };
 
+  const searchQuery = ref('');
+
+  const filteredRecipes = computed(() =>
+    recipes.value.filter(
+      recipe => recipe.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    )
+  );
+
   const removeRecipe = (id: string) => {
     recipes.value = recipes.value.filter(recipe => recipe.id !== id);
   };
@@ -41,5 +50,5 @@ export const useRecipeStore = defineStore('recipe', () => {
     }
   };
 
-  return { recipes, addRecipe, removeRecipe, updateRecipe, getRecipeById }
+  return { recipes, addRecipe, removeRecipe, updateRecipe, getRecipeById, searchQuery, filteredRecipes };
 });

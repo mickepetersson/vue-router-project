@@ -5,10 +5,23 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
+import localStoragePlugin from './plugins/pinia/localStoragePlugin';
 
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(createPinia());
+//create a pinia plugin
+//this plugin is available in all pinia stores
+function ourPlugin() {
+    return {
+        secret: 'Dummy secret',
+    };
+}
+
+pinia.use(ourPlugin);
+pinia.use(localStoragePlugin);
+//use the pinia plugin
+app.use(pinia);
 app.use(router);
 
 app.mount('#app');
